@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "benford",
+  "description": "__MSG_appDescription__",
+  "version": "1.0.0",
+  "default_locale": "en",
+  "icons": {
+    "16": "assets/image/icon-16.png",
+    "128": "assets/image/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["file:///*", "http://*/*", "https://*/*"],
+      "css": ["assets/css/content_scripts.css"],
+      "js": ["assets/js/lodash.min.js", "assets/js/content_scripts.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["assets/js/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "assets/image/icon-128.png",
+    "default_title": "benford",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": ["tabs", "http://*/*", "https://*/*"]
+}

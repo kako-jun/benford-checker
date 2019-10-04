@@ -1,0 +1,37 @@
+p {
+  margin-left: 10px;
+}
+
+li {
+  font-family: "Roboto Mono", monospace;
+}
+
+.center {
+  text-align: center;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.btn-circle-stitch {
+  display: inline-block;
+  text-decoration: none;
+  background: #87befd;
+  color: #fff;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0px 0px 0px 5px #87befd;
+  border: dashed 1px #fff;
+  transition: 0.4s;
+  margin-top: 10px;
+}
+
+.btn-circle-stitch:hover {
+  background: #668ad8;
+  box-shadow: 0px 0px 0px 5px #668ad8;
+}
