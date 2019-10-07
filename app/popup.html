@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Popup</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/popup.css" />
-  </head>
-  <body>
-    <h1 id ="appName"> Benford's Law Checker</h1>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Popup</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/css/popup.css" />
+</head>
+
+<body>
+  <div id="capture-target">
+    <h1 id="appName"> Benford's Law Checker</h1>
     <p id="appDescription">Let's check if the site follows the Benford's law.<p>
-    <div class="center">
-      <button id="count-numbers" class="btn-circle-stitch">re-check</button>
+    <h2>result</h2>
+    <div id="site-name"></div>
+    <div id="site-url"></div>
+    <div id="count"></div>
+    <div id="chart-wrapper">
+      <canvas id="chart">
     </div>
-    <div id="result"></div>
-    <canvas id="chart"></div>
-    <script src="assets/js/lodash.min.js"></script>
-    <script src="assets/js/Chart.min.js"></script>
-    <script src="assets/js/popup.js"></script>
-  </body>
+  </div>
+  <div class="center">
+    <button id="reCheck" class="btn-circle-stitch">re-check</button>
+    <button id="share" class="btn-circle-stitch">share</button>
+    <a id="download" style="display:none;"></a>
+  </div>
+  <script src="assets/js/lodash.min.js"></script>
+  <script src="assets/js/Chart.min.js"></script>
+  <script src="assets/js/html2canvas.min.js"></script>
+  <script src="assets/js/popup.js"></script>
+</body>
+
 </html>

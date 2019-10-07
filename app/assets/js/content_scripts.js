@@ -1,10 +1,18 @@
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   console.log(msg);
 
-  if (msg.command === "countNumbers") {
-    const occurrences = countNumbers();
-    console.log(occurrences);
-    sendResponse(occurrences);
+  switch (msg.command) {
+    case "getSiteInformation":
+      sendResponse({
+        name: document.title,
+        url: document.URL
+      });
+      break;
+    case "countNumbers":
+      const occurrences = countNumbers();
+      console.log(occurrences);
+      sendResponse(occurrences);
+      break;
   }
 });
 
