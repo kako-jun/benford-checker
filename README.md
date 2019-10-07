@@ -1,1 +1,1 @@
-# benford
+# Benford's Law Checker

@@ -1,3 +1,59 @@
+const filterOccurrences = occurrences => {
+  const filterd = _.filter(occurrences, (o, i) => {
+    return i >= 1;
+  }).compact();
+
+  return filterd;
+};
+
+const showCount = occurrences => {
+  const sum = _.sum(occurrences);
+  let data = _.map(occurrences, (o, i) => {
+    return {
+      i,
+      count: o,
+      ratio: o / sum
+    };
+  });
+
+  const padding = (src, length) => {
+    const temp = (Array(length).join(" ") + src).slice(-length);
+    return temp.replace(" ", "&nbsp");
+  };
+
+  const maxCountObject = _.max(data, d => {
+    return String(d.count).length;
+  });
+  const maxCountLength = String(maxCountObject.count).length;
+
+  const maxRatioObject = _.max(data, d => {
+    return String(d.ratio).length;
+  });
+  const maxRatioLength = String(maxRatioObject.ratio).length;
+
+  data = _.map(data, d => {
+    console.log(padding(d.count, maxCountLength));
+    console.log(padding(d.ratio, maxRatioLength));
+    return {
+      i: d.i,
+      count: padding(d.count, maxCountLength),
+      ratio: padding(d.ratio, maxRatioLength)
+    };
+  });
+
+  const resultElement = document.getElementById("result");
+  resultElement.innerHTML = [
+    '<div class="benford-popup">',
+    "  <h2>result</h2>",
+    "  <ul>",
+    _.map(data, d => {
+      return "<li>" + d.i + ": " + d.count + " (" + d.ratio + ")</li>";
+    }).join(""),
+    "  </ul>",
+    "</div>"
+  ].join("");
+};
+
 const drawChart = occurrences => {
   const chartElement = document.getElementById("chart");
   const ctx = chartElement.getContext("2d");
@@ -5,9 +61,6 @@ const drawChart = occurrences => {
   let labels = _.map(occurrences, (o, i) => {
     return i;
   });
-  labels = _.drop(labels, 1);
-
-  const data = _.drop(occurrences, 1);
 
   const myChart = new Chart(ctx, {
     type: "bar",
@@ -37,40 +90,6 @@ const drawChart = occurrences => {
   });
 };
 
-const showCount = occurrences => {
-  let data = _.map(occurrences, (o, i) => {
-    return {
-      i,
-      o
-    };
-  });
-  data = _.drop(data, 1);
-  const found = _.max(data, d => {
-    return String(d.o).length;
-  });
-  const maxLength = String(found.o).length;
-  const padding = (src, length) => {
-    const temp = (Array(length).join(" ") + src).slice(-length);
-    return temp.replace(" ", "&nbsp");
-  };
-  data = _.map(data, d => {
-    console.log(padding(d.o, maxLength));
-    return { i: d.i, o: padding(d.o, maxLength) };
-  });
-
-  const resultElement = document.getElementById("result");
-  resultElement.innerHTML = [
-    '<div class="benford-popup">',
-    "  <h2>result</h2>",
-    "  <ul>",
-    _.map(data, d => {
-      return "<li>" + d.i + ": " + d.o + "</li>";
-    }).join(""),
-    "  </ul>",
-    "</div>"
-  ].join("");
-};
-
 document.getElementById("count-numbers").onclick = () => {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     console.log(tabs);
@@ -81,6 +100,7 @@ document.getElementById("count-numbers").onclick = () => {
       },
       res => {
         console.log(res);
+        res = filterOccurrences(res);
         showCount(res);
         drawChart(res);
       }
@@ -89,6 +109,15 @@ document.getElementById("count-numbers").onclick = () => {
 };
 
 window.onload = () => {
+  const i18n = key => {
+    const message = chrome.i18n.getMessage(key);
+    return message ? message : key;
+  };
+
+  document.getElementById("appName").innerText = i18n("appName");
+  document.getElementById("appDescription").innerText = i18n("appDescription");
+  document.getElementById("reCheck").innerText = i18n("reCheck");
+
   chrome.browserAction.setBadgeText({
     text: ""
   });

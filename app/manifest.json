@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "benford",
+  "name": "__MSG_appName__",
   "description": "__MSG_appDescription__",
   "version": "1.0.0",
   "default_locale": "en",
@@ -20,7 +20,7 @@
   },
   "browser_action": {
     "default_icon": "assets/image/icon-128.png",
-    "default_title": "benford",
+    "default_title": "__MSG_appName__",
     "default_popup": "popup.html"
   },
   "permissions": ["tabs", "http://*/*", "https://*/*"]

@@ -1,18 +1,14 @@
 {
   "appName": {
-    "message": "japanese horror film effect",
+    "message": "Benford's Law Checker",
     "description": "The name of the application"
   },
-  "appShortName": {
-    "message": "horror effect",
-    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
-  },
   "appDescription": {
-    "message": "Benford's law",
+    "message": "Let's check if the site follows the Benford's law.",
     "description": "The description of the application"
   },
-  "browserActionTitle": {
-    "message": "japanese horror film effect",
-    "description": "The title of the browser action button"
+  "reCheck": {
+    "message": "re-check",
+    "description": ""
   }
 }
