@@ -125,18 +125,6 @@ const drawChart = occurrences => {
   });
 };
 
-const downloadImage = data => {
-  document.getElementById("download").href = data;
-  document.getElementById("download").download = "benford.png";
-  document.getElementById("download").click();
-};
-
-const screenshot = () => {
-  html2canvas(document.getElementById("capture-target")).then(canvas => {
-    downloadImage(canvas.toDataURL());
-  });
-};
-
 const check = () => {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     // console.log(tabs);
@@ -175,8 +163,37 @@ document.getElementById("reCheck").onclick = () => {
   check();
 };
 
-document.getElementById("share").onclick = () => {
+const downloadImage = data => {
+  document.getElementById("download-link").href = data;
+  document.getElementById("download-link").download = "benford.png";
+  document.getElementById("download-link").click();
+};
+
+const screenshot = () => {
+  html2canvas(document.getElementById("capture-target")).then(canvas => {
+    downloadImage(canvas.toDataURL());
+  });
+};
+
+document.getElementById("download").onclick = () => {
   screenshot();
+};
+
+const share = () => {
+  let text = "";
+  text += document.getElementById("site-name").innerText;
+  text += " ";
+  text += document.getElementById("site-url").innerText;
+  text += " ";
+  // text += document.getElementById("count").innerText;
+
+  const url =
+    "https://twitter.com/share?url=https://your.service.url&text=" + text;
+  window.open(url);
+};
+
+document.getElementById("share").onclick = () => {
+  share();
 };
 
 window.onload = () => {
