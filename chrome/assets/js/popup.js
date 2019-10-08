@@ -48,19 +48,19 @@ const showCount = occurrences => {
     return temp.replace(" ", "&nbsp");
   };
 
-  const maxCountObject = _.max(data, d => {
+  const maxCountObject = _.maxBy(data, d => {
     return String(d.count).length;
   });
   const maxCountLength = String(maxCountObject.count).length;
 
-  const maxRatioObject = _.max(data, d => {
+  const maxRatioObject = _.maxBy(data, d => {
     return d.ratio.length;
   });
   const maxRatioLength = String(maxRatioObject.ratio).length;
 
   data = _.map(data, d => {
-    console.log(padding(d.count, maxCountLength));
-    console.log(padding(d.ratio, maxRatioLength));
+    // console.log(padding(d.count, maxCountLength));
+    // console.log(padding(d.ratio, maxRatioLength));
     return {
       i: d.i,
       count: padding(d.count, maxCountLength),
@@ -143,7 +143,7 @@ const check = () => {
         command: "getSiteInformation"
       },
       res => {
-        console.log(res);
+        // console.log(res);
         if (res) {
           document.getElementById("site-name").innerText = res.name;
           document.getElementById("site-url").innerHTML = "&nbsp&nbsp";
@@ -158,7 +158,7 @@ const check = () => {
         command: "countNumbers"
       },
       res => {
-        console.log(res);
+        // console.log(res);
         if (res) {
           const occurrences = filterOccurrences(res);
           showCount(occurrences);

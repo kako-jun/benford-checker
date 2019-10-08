@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  console.log(msg);
+  // console.log(msg);
 
   switch (msg.command) {
     case "getSiteInformation":
@@ -10,14 +10,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       break;
     case "countNumbers":
       const occurrences = countNumbers();
-      console.log(occurrences);
+      // console.log(occurrences);
       sendResponse(occurrences);
       break;
   }
 });
 
 const countNumbers = () => {
-  console.log(document.body.innerText);
+  // console.log(document.body.innerText);
   const srcText = document.body.innerText;
 
   const numberArray = [...Array(10).keys()];
