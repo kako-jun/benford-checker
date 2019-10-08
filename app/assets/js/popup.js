@@ -1,3 +1,12 @@
+const i18n = key => {
+  const message = chrome.i18n.getMessage(key);
+  return message ? message : key;
+};
+
+document.getElementById("appName").onclick = () => {
+  window.open("https://github.com/kako-jun/benford-checker");
+};
+
 const filterOccurrences = countArray => {
   const occurrences = _.map(countArray, (c, i) => {
     return {
@@ -72,7 +81,7 @@ const showCount = occurrences => {
 const drawChart = occurrences => {
   const chartElement = document.getElementById("chart");
   const ctx = chartElement.getContext("2d");
-  ctx.canvas.height = 150;
+  ctx.canvas.height = 140;
 
   const labels = _.map(occurrences, "i");
   const data = _.map(occurrences, "count");
@@ -137,7 +146,8 @@ const check = () => {
         console.log(res);
         if (res) {
           document.getElementById("site-name").innerText = res.name;
-          document.getElementById("site-url").innerText = res.url;
+          document.getElementById("site-url").innerHTML = "&nbsp&nbsp";
+          document.getElementById("site-url").innerText += res.url;
         }
       }
     );
@@ -165,7 +175,7 @@ document.getElementById("reCheck").onclick = () => {
 
 const downloadImage = data => {
   document.getElementById("download-link").href = data;
-  document.getElementById("download-link").download = "benford.png";
+  document.getElementById("download-link").download = "benford-checker.png";
   document.getElementById("download-link").click();
 };
 
@@ -181,14 +191,17 @@ document.getElementById("download").onclick = () => {
 
 const share = () => {
   let text = "";
-  text += document.getElementById("site-name").innerText;
-  text += " ";
+  text += i18n("checked");
+  text += encodeURIComponent("\n");
+  text += encodeURIComponent(document.getElementById("site-name").innerText);
+  text += encodeURIComponent("\n");
   text += document.getElementById("site-url").innerText;
-  text += " ";
-  // text += document.getElementById("count").innerText;
+  text += encodeURIComponent("\n\n");
+  text += i18n("result");
+  text += encodeURIComponent("\n");
+  text += encodeURIComponent(document.getElementById("count").innerText);
 
-  const url =
-    "https://twitter.com/share?url=https://your.service.url&text=" + text;
+  const url = "https://twitter.com/share?text=" + text;
   window.open(url);
 };
 
@@ -197,14 +210,13 @@ document.getElementById("share").onclick = () => {
 };
 
 window.onload = () => {
-  const i18n = key => {
-    const message = chrome.i18n.getMessage(key);
-    return message ? message : key;
-  };
-
-  document.getElementById("appName").innerText = i18n("appName");
+  document.getElementById("appName").innerHTML =
+    i18n("appName") + document.getElementById("appName").innerHTML;
   document.getElementById("appDescription").innerText = i18n("appDescription");
+  document.getElementById("result").innerText = i18n("result");
   document.getElementById("reCheck").innerText = i18n("reCheck");
+  document.getElementById("download").innerText = i18n("download");
+  document.getElementById("share").innerText = i18n("share");
 
   chrome.browserAction.setBadgeText({
     text: ""

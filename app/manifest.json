@@ -19,7 +19,7 @@
     "scripts": ["assets/js/background.js"]
   },
   "browser_action": {
-    "default_icon": "assets/image/icon-128.png",
+    "default_icon": "assets/image/icon-16.png",
     "default_title": "__MSG_appName__",
     "default_popup": "popup.html"
   },

@@ -4,11 +4,27 @@
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "Let's check if the site follows the Benford's law.",
+    "message": "Let's check if the site follows Benford's Law.",
     "description": "The description of the application"
+  },
+  "result": {
+    "message": "result",
+    "description": ""
   },
   "reCheck": {
     "message": "re-check",
+    "description": ""
+  },
+  "download": {
+    "message": "download",
+    "description": ""
+  },
+  "share": {
+    "message": "share",
+    "description": ""
+  },
+  "checked": {
+    "message": "I checked if the site follows Benford's Law.",
     "description": ""
   }
 }

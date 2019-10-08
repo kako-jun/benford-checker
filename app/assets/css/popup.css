@@ -36,11 +36,35 @@ button:focus {
   box-shadow: 0px 0px 0px 5px #668ad8;
 }
 
+#capture-target {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#appName {
+  cursor: pointer;
+}
+
+.github-icon {
+  width: 16px;
+  margin-left: 8px;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+.copyright {
+  font-weight: 1;
+  font-size: 0.8rem;
+}
+
 #site-name,
 #site-url {
-  /* max-width: 420px; */
   width: 420px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+#site-url {
+  color: blue;
 }

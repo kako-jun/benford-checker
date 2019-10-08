@@ -1,0 +1,30 @@
+{
+  "appName": {
+    "message": "ベンフォードの法則チェッカー",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "サイトが「ベンフォードの法則」に従っているかをチェックします",
+    "description": "The description of the application"
+  },
+  "result": {
+    "message": "結果",
+    "description": ""
+  },
+  "reCheck": {
+    "message": "チェック",
+    "description": ""
+  },
+  "download": {
+    "message": "画像化",
+    "description": ""
+  },
+  "share": {
+    "message": "シェア",
+    "description": ""
+  },
+  "checked": {
+    "message": "このサイトが「ベンフォードの法則」に従っているかをチェックしました。",
+    "description": ""
+  }
+}
