@@ -68,3 +68,13 @@ button:focus {
 #site-url {
   color: blue;
 }
+
+@-moz-document url-prefix() {
+  #appName {
+    width: 550px;
+  }
+
+  #download {
+    display: none;
+  }
+}
