@@ -136,36 +136,41 @@ const drawChart = occurrences => {
 
 const check = () => {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    // console.log(tabs);
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      {
-        command: "getSiteInformation"
-      },
-      res => {
-        // console.log(res);
-        if (res) {
-          document.getElementById("site-name").innerText = res.name;
-          document.getElementById("site-url").innerHTML = "&nbsp&nbsp";
-          document.getElementById("site-url").innerText += res.url;
-        }
-      }
-    );
+    if (tabs.length > 0) {
+      const targetTab = tabs[0];
+      console.log(targetTab);
+      if (targetTab.url.match(/https?:\/\//) || targetTab.url.match(/file:\/\//)) {
+        chrome.tabs.sendMessage(
+          targetTab.id,
+          {
+            command: "getSiteInformation"
+          },
+          res => {
+            // console.log(res);
+            if (res) {
+              document.getElementById("site-name").innerText = res.name;
+              document.getElementById("site-url").innerHTML = "&nbsp&nbsp";
+              document.getElementById("site-url").innerText += res.url;
+            }
+          }
+        );
 
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      {
-        command: "countNumbers"
-      },
-      res => {
-        // console.log(res);
-        if (res) {
-          const occurrences = filterOccurrences(res);
-          showCount(occurrences);
-          drawChart(occurrences);
-        }
+        chrome.tabs.sendMessage(
+          targetTab.id,
+          {
+            command: "countNumbers"
+          },
+          res => {
+            // console.log(res);
+            if (res) {
+              const occurrences = filterOccurrences(res);
+              showCount(occurrences);
+              drawChart(occurrences);
+            }
+          }
+        );
       }
-    );
+    }
   });
 };
 
@@ -210,17 +215,16 @@ document.getElementById("share").onclick = () => {
 };
 
 window.onload = () => {
-  document.getElementById("appName").innerHTML =
-    i18n("appName") + document.getElementById("appName").innerHTML;
+  document.getElementById("appName").innerHTML = i18n("appName") + document.getElementById("appName").innerHTML;
   document.getElementById("appDescription").innerText = i18n("appDescription");
   document.getElementById("result").innerText = i18n("result");
   document.getElementById("reCheck").innerText = i18n("reCheck");
   document.getElementById("download").innerText = i18n("download");
   document.getElementById("share").innerText = i18n("share");
 
-  chrome.browserAction.setBadgeText({
-    text: ""
-  });
+  // chrome.browserAction.setBadgeText({
+  //   text: ""
+  // });
 
   check();
 };
